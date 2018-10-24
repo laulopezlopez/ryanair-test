@@ -26,8 +26,13 @@ module.exports = {
     go:
         function (site) {
             browser.get(site);
-        }
-
+        },
+    searchFlights: function (departure, destination, day, month, year, adults, child) {
+        var baseUrl='https://www.ryanair.com/ie/en/';
+        var targetUrl=baseUrl+'booking/home/' + departure + '/' + destination + '/' + year + '-' + month + '-' + day + '//' + adults + '/0/' + child + '/0';
+        browser.get(targetUrl);
+        browser.waitForAngular();
+    },
 
 
 };
