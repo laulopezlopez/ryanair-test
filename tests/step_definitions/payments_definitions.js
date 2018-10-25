@@ -13,6 +13,7 @@ var timeout = 10000; // in miliseconds
 var mainPage = require('../pages/mainPage.js');
 var flightPage = require('../pages/flightPage.js');
 var seatsPage = require('../pages/seatsPage.js');
+var paymentPage = require('../pages/paymentPage.js');
 
 Given(/^I make a booking from "([^"]*)" to "([^"]*)" on (\d+)\/(\d+)\/(\d+) for (\d+) adults and (\d+) child$/,
     function (departure, destination, day, month, year, adults, child) {
@@ -25,3 +26,17 @@ Given(/^I make a booking from "([^"]*)" to "([^"]*)" on (\d+)\/(\d+)\/(\d+) for 
 
 
 });
+
+When(/^I pay for booking with card details "(\+?[\d ]+)", "(\d+)\/(\d+)" and "(\d+)"$/,
+    function (cardNumber, expiryMonth, expiryYear, CVV) {
+        paymentPage.fillTwoAdultsAndOneChildData();
+        paymentPage.fillPaymentDetails(cardNumber,expiryMonth,expiryYear,CVV);
+        return browser.wait(EC.urlContains('/booking/payment'), 5000);
+});
+
+Then(/^I should get payment declined message$/, function (callback) {
+    return browser.wait(EC.urlContains('/booking/payment'), 5000);
+});
+
+
+

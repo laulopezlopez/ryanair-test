@@ -37,7 +37,7 @@ module.exports = {
         return browser.wait(EC.not(EC.presenceOf(this.insuranceAcceptBtn)));
     },
 
-    clickSeat(num) {
+    clickSeat: function (num) {
         browser.wait(EC.elementToBeClickable(this.availableSeats.get(num)), timeout, "Seats not loaded");
         this.availableSeats.get(num).click();
     }

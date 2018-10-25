@@ -1,8 +1,8 @@
 {
   "login_email": "testryanair@mail.com",
   "login_pass": "T3st.ryanair",
-  "passengers": [
-    {
+  "passengers": {
+    "adult1": {
       "title": "Mr",
       "name": "Roberto",
       "lastName": "Veiga",
@@ -17,7 +17,7 @@
         "country": "Spain"
       }
     },
-    {
+    "adult2": {
       "title": "Ms",
       "name": "Conchi",
       "lastName": "Lopez",
@@ -32,20 +32,18 @@
         "country": "Spain"
       }
     },
-    {
-      "title": "",
+    "child": {
       "name": "Miguel",
-      "lastName": "Lopez",
-      "phone": {
-        "country": "Spain",
-        "number": "644848767"
-      },
-      "billingAddress": {
-        "address": "Paseo de la esperanza",
-        "city": "Madrid",
-        "postCode": "28028",
-        "country": "Spain"
-      }
+      "lastName": "Lopez"
     }
-  ]
+  },
+  "cards": {
+    "card1": {
+      "number": "2345 3456 1234 1234",
+      "expiryMonth": "12",
+      "expiryYear": "2020",
+      "cvv": "234",
+      "holdersName": "Ruben Perez"
+    }
+  }
 }
