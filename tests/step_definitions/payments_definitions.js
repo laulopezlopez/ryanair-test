@@ -28,9 +28,13 @@ Given(/^I make a booking from "([^"]*)" to "([^"]*)" on (\d+)\/(\d+)\/(\d+) for 
 });
 
 When(/^I pay for booking with card details "(\+?[\d ]+)", "(\d+)\/(\d+)" and "(\d+)"$/,
-    function (cardNumber, expiryMonth, expiryYear, CVV) {
+    function (cardNumber, expiryMonth, expiryYear, cvv) {
         paymentPage.fillTwoAdultsAndOneChildData();
-        paymentPage.fillPaymentDetails(cardNumber,expiryMonth,expiryYear,CVV);
+        var myCard=paymentPage.createCard(cardNumber,expiryMonth,expiryYear,cvv);
+        paymentPage.fillCardDetails(myCard);
+        paymentPage.fillBillingDetails();
+        paymentPage.fillContactDetails();
+       // paymentPage.checkAcceptPolicy();
         return browser.wait(EC.urlContains('/booking/payment'), 5000);
 });
 

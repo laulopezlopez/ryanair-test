@@ -10,7 +10,7 @@
         "country": "Spain",
         "number": "612898767"
       },
-      "billingAddress": {
+      "billingData": {
         "address": "Calle Andurria",
         "city": "Lugo",
         "postCode": "27002",
@@ -25,7 +25,7 @@
         "country": "Spain",
         "number": "677898767"
       },
-      "billingAddress": {
+      "billingData": {
         "address": "Road 1",
         "city": "Madrid",
         "postCode": "28028",
@@ -40,6 +40,7 @@
   "cards": {
     "card1": {
       "number": "2345 3456 1234 1234",
+      "cardType": "MasterCard",
       "expiryMonth": "12",
       "expiryYear": "2020",
       "cvv": "234",
