@@ -1,32 +1,46 @@
 'use strict';
 var EC = protractor.ExpectedConditions;
+var timeout = 10000;
 
 module.exports = {
 
     page: this,
-    url:'',
+    url: '',
     popupBtn: $('.seat-map-prompt-content .core-btn-primary'),
-    availableSeats :$$('.seat-click'),
-    firstAvailableSeats :$$('.seat-click').get(1),
-    reviewSeatsBtn : $('[data-ref="dialog-overlay-footer-ok-btn"]'),
+    availableSeats: $$('.seat-row-seat.standard:not(.reserved):not(.selected) .seat-click'),
+    firstAvailableSeats: $$('.seat-row-seat.standard:not(.reserved):not(.selected) .seat-click').get(0),
+    lastAvailableSeats: $$('.seat-row-seat.standard:not(.reserved):not(.selected) .seat-click').last(),
+    insuranceAcceptBtn: $('#ngdialog3 button'),
+    header: $('.seat-map-header'),
+
+    footerBtn: $('[data-ref="dialog-overlay-footer-ok-btn"]'),
+
     go:
         function (site) {
             browser.get(site);
         },
-    getFirstVisibleSeat : function (){
-        return this.availableSeats.filter(function(elem) {
-            return  EC.elementToBeClickable(elem);
-        }).then(function (items) {
-            return items.first().click();
-        });
-    },
+
     selectSeats: function (passangers) {
-        browser.waitForAngular();
+       //Todo: refactor this function. It might be a scroll issue
+        browser.wait(EC.elementToBeClickable(this.popupBtn), timeout, "Modal in seats selection is not clickable");
         this.popupBtn.click();
-        this.firstAvailableSeats.click();
-        return this.reviewSeatsBtn.click();
+        browser.wait(EC.not(EC.presenceOf(this.popupBtn)));
+        this.clickSeat(80);
+        this.clickSeat(81);
+        this.clickSeat(82);
+
+        this.footerBtn.click();
+        browser.wait(EC.not(EC.presenceOf(this.availableSeats)));
+        this.footerBtn.click();
+        browser.wait(EC.elementToBeClickable(this.insuranceAcceptBtn), timeout, "insuranceAcceptBtn are not Clickable");
+        this.insuranceAcceptBtn.click();
+        return browser.wait(EC.not(EC.presenceOf(this.insuranceAcceptBtn)));
     },
 
+    clickSeat(num) {
+        browser.wait(EC.elementToBeClickable(this.availableSeats.get(num)), timeout, "Seats not loaded");
+        this.availableSeats.get(num).click();
+    }
 
 };
 

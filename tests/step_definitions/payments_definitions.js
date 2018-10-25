@@ -17,9 +17,11 @@ var seatsPage = require('../pages/seatsPage.js');
 Given(/^I make a booking from "([^"]*)" to "([^"]*)" on (\d+)\/(\d+)\/(\d+) for (\d+) adults and (\d+) child$/,
     function (departure, destination, day, month, year, adults, child) {
         flightPage.searchFlights(departure, destination, day, month, year, adults, child);
-        mainPage.doLogin();
         flightPage.chooseAnyFlight();
-        seatsPage.selectSeats(adults+child);
-        return expect(browser.getCurrentUrl()).to.eventually.equal("");
+        seatsPage.selectSeats();
+        mainPage.doLogin();
+        mainPage.headerCheckOutBtn.click();
+        return browser.wait(EC.urlContains('/booking/payment'), 5000);
+
 
 });
