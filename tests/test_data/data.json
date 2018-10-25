@@ -1,4 +1,51 @@
 {
   "login_email": "testryanair@mail.com",
-  "login_pass": "T3st.ryanair"
+  "login_pass": "T3st.ryanair",
+  "passengers": [
+    {
+      "title": "Mr",
+      "name": "Roberto",
+      "lastName": "Veiga",
+      "phone": {
+        "country": "Spain",
+        "number": "612898767"
+      },
+      "billingAddress": {
+        "address": "Calle Andurria",
+        "city": "Lugo",
+        "postCode": "27002",
+        "country": "Spain"
+      }
+    },
+    {
+      "title": "Ms",
+      "name": "Conchi",
+      "lastName": "Lopez",
+      "phone": {
+        "country": "Spain",
+        "number": "677898767"
+      },
+      "billingAddress": {
+        "address": "Road 1",
+        "city": "Madrid",
+        "postCode": "28028",
+        "country": "Spain"
+      }
+    },
+    {
+      "title": "",
+      "name": "Miguel",
+      "lastName": "Lopez",
+      "phone": {
+        "country": "Spain",
+        "number": "644848767"
+      },
+      "billingAddress": {
+        "address": "Paseo de la esperanza",
+        "city": "Madrid",
+        "postCode": "28028",
+        "country": "Spain"
+      }
+    }
+  ]
 }
