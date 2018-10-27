@@ -5,6 +5,7 @@ module.exports = {
 
     page: this,
     signInBtn: $('#myryanair-auth-login'),
+    paymentDeclinedMessage: $('prompt.error'),
     passengerDetails: {
         getPassengerTitleSelectorOpt: function (num, title) {
             return $('[name="passengerForm' + num + '"] .payment-passenger-title select option[label="' + title + '"]');
@@ -20,7 +21,7 @@ module.exports = {
     selectOpt: function (nameSelector, opt) {
         return $('select[name="' + nameSelector + '"] option[label="' + opt + '"]');
     },
-    contactDetails:{
+    contactDetails: {
         phoneNumber: $('input[name="phoneNumber"]')
     },
     paymentDetails: {
@@ -32,7 +33,7 @@ module.exports = {
         cardHolderNameInput: $('input[name="cardHolderName"]'),
         billingAddressAddressInput: $('input[name="billingAddressAddressLine1"]'),
         billingAddressCityInput: $('input[name="billingAddressCity"]'),
-        acceptPolicyCheckbox: $('[name="acceptPolicy"]'),
+        acceptPolicyCheckbox: $('.cta .core-checkbox-label--icon'),
     },
     payNowBtn: $('button[ng-click="$ctrl.processPayment()"]'),
 
@@ -55,11 +56,13 @@ module.exports = {
 
         var payment = this.paymentDetails;
         payment.cardNumberInput.sendKeys(card.cardNumber.replace(/\s/g, ""));
-        payment.securityCodeInput.sendKeys(card.cvv);
-        payment.cardHolderNameInput.sendKeys(card.holdersName);
         this.selectOpt('expiryMonth', card.expiryMonth).click();
         this.selectOpt('expiryYear', card.expiryYear).click();
         this.selectOpt('cardType', card.cardType).click();
+        payment.securityCodeInput.sendKeys(card.cvv);
+        payment.cardHolderNameInput.sendKeys(card.holdersName);
+
+
 
     },
     fillBillingDetails: function (billingData = testdata.passengers.adult1.billingData) {
@@ -95,7 +98,7 @@ module.exports = {
             return "20" + expiryYear;
         } else return expiryYear
     }
-}
+};
 
 
 

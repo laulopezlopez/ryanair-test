@@ -31,15 +31,18 @@ When(/^I pay for booking with card details "(\+?[\d ]+)", "(\d+)\/(\d+)" and "(\
     function (cardNumber, expiryMonth, expiryYear, cvv) {
         paymentPage.fillTwoAdultsAndOneChildData();
         var myCard=paymentPage.createCard(cardNumber,expiryMonth,expiryYear,cvv);
+        paymentPage.fillContactDetails();
         paymentPage.fillCardDetails(myCard);
         paymentPage.fillBillingDetails();
-        paymentPage.fillContactDetails();
-       // paymentPage.checkAcceptPolicy();
+        paymentPage.checkAcceptPolicy();
+        paymentPage.payNowBtn.click();
         return browser.wait(EC.urlContains('/booking/payment'), 5000);
 });
 
-Then(/^I should get payment declined message$/, function (callback) {
-    return browser.wait(EC.urlContains('/booking/payment'), 5000);
+Then(/^I should get payment declined message$/, function () {
+     expect(paymentPage.paymentDeclinedMessage.isDisplayed()).to.eventually.equals(false,"error card message shown");
+    return expect(paymentPage.paymentDeclinedMessage.isDisplayed()).to.eventually.equals(true,"error card message not shown");
+
 });
 
 
