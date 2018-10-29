@@ -20,14 +20,20 @@ module.exports = {
             browser.get(site);
         },
 
+    waitForPage: function (passangers) {
+        return browser.wait(EC.urlContains('/booking/extras/seats'), timeout,"We are not in the page to select seats");
+    },
+
+
     selectSeats: function (passangers) {
        //Todo: refactor this function. It might be a scroll issue
+        this.waitForPage();
         browser.wait(EC.elementToBeClickable(this.popupBtn), timeout, "Modal in seats selection is not clickable");
         this.popupBtn.click();
         browser.wait(EC.not(EC.presenceOf(this.popupBtn)));
         this.clickSeat(80);
-        this.clickSeat(81);
-        this.clickSeat(82);
+        this.clickSeat(80);
+        this.clickSeat(80);
 
         this.footerBtn.click();
         browser.wait(EC.not(EC.presenceOf(this.availableSeats)));

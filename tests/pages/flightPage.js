@@ -13,15 +13,12 @@ module.exports = {
         var baseUrl='https://www.ryanair.com/ie/en/';
         var targetUrl=baseUrl+'booking/home/' + departure + '/' + destination + '/' + year + '-' + month + '-' + day + '//' + adults + '/0/' + child + '/0';
         browser.get(targetUrl);
-        return browser.wait(EC.visibilityOf(this.firstFlight), timeout);
+        return browser.wait(EC.elementToBeClickable(this.firstFlight), timeout,"Flights were not loaded");
     },
     chooseAnyFlight: function () {
         this.firstFlight.click();
-        browser.wait(EC.visibilityOf(this.farePlus), timeout,"chooseAnyFlight: Fares are not visible");
-        this.farePlus.click();
-        browser.waitForAngular();
-        browser.wait(EC.elementToBeClickable(this.continueBtn), timeout,"chooseAnyFlight:Continue button not clickable");
-        return this.continueBtn.click();
+        browser.wait(EC.elementToBeClickable(this.farePlus), timeout,"Fares were not loaded");
+        return this.farePlus.click();
     }
 };
 
