@@ -7,11 +7,10 @@ module.exports = {
     page: this,
     url: '',
     popupBtn: $('.seat-map-prompt-content .core-btn-primary'),
-    availableSeats: $$('.seat-row-seat.standard:not(.reserved):not(.selected) .seat-click'),
-    firstAvailableSeats: $$('.seat-row-seat.standard:not(.reserved):not(.selected) .seat-click').get(0),
-    lastAvailableSeats: $$('.seat-row-seat.standard:not(.reserved):not(.selected) .seat-click').last(),
+    firstAvailableSeat: $$('.seat-row-seat:not(.reserved):not(.selected):not(.extra-leg) .seat-click').get(0),
+    availableSeats: $$('.seat-row-seat:not(.reserved):not(.selected):not(.extra-leg) .seat-click'),
     insuranceAcceptBtn: $('#ngdialog3 button'),
-    header: $('.seat-map-header'),
+    seatMapHeader: $('.seat-map-header'),
 
     footerBtn: $('[data-ref="dialog-overlay-footer-ok-btn"]'),
 
@@ -21,19 +20,19 @@ module.exports = {
         },
 
     waitForPage: function (passangers) {
-        return browser.wait(EC.urlContains('/booking/extras/seats'), timeout,"We are not in the page to select seats");
+        return browser.wait(EC.urlContains('/booking/extras/seats'), timeout, "We are not in the page to select seats");
     },
 
 
-    selectSeats: function (passangers) {
-       //Todo: refactor this function. It might be a scroll issue
+    selectSeats: function (passengers) {
         this.waitForPage();
         browser.wait(EC.elementToBeClickable(this.popupBtn), timeout, "Modal in seats selection is not clickable");
         this.popupBtn.click();
         browser.wait(EC.not(EC.presenceOf(this.popupBtn)));
-        this.clickSeat(80);
-        this.clickSeat(80);
-        this.clickSeat(80);
+
+        for (var i = 0; i < passengers; i++) {
+            this.scrollAndClickSeat(this.firstAvailableSeat);
+        }
 
         this.footerBtn.click();
         browser.wait(EC.not(EC.presenceOf(this.availableSeats)));
@@ -43,9 +42,19 @@ module.exports = {
         return browser.wait(EC.not(EC.presenceOf(this.insuranceAcceptBtn)));
     },
 
-    clickSeat: function (num) {
-        browser.wait(EC.elementToBeClickable(this.availableSeats.get(num)), timeout, "Seats not loaded");
-        this.availableSeats.get(num).click();
+    scrollAndClickSeat: function (element) {
+        return this.seatMapHeader.getSize().then(function (size) {
+            return browser.executeScript("return arguments[0].offsetTop;", element.getWebElement()).then(function (rect) {
+                var scroll = rect - size.height;
+                return browser.executeScript("return arguments[0].scrollTop=" + scroll + ";", $('#scrollable')).then(function () {
+                    return element.click();
+                });
+
+            });
+
+        });
+
+
     }
 
 };

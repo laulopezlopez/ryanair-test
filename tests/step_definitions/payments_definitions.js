@@ -16,12 +16,12 @@ var seatsPage = require('../pages/seatsPage.js');
 var paymentPage = require('../pages/paymentPage.js');
 
 Given(/^I make a booking from "([^"]*)" to "([^"]*)" on (\d+)\/(\d+)\/(\d+) for (\d+) adults and (\d+) child$/,
-    function (departure, destination, day, month, year, adults, child) {
-        flightPage.searchFlights(departure, destination, day, month, year, adults, child);
+    function (departure, destination, day, month, year, adults, children) {
+        flightPage.searchFlights(departure, destination, day, month, year, adults, children);
         flightPage.chooseAnyFlight();
         expect(mainPage.cartPriceValue.getText()).not.to.eventually.contains("0.00","Flight was not added to cart");
         mainPage.cartContinueBtn.click();
-        seatsPage.selectSeats();
+        seatsPage.selectSeats(adults+children);
         mainPage.doLogin();
         mainPage.cartContinueBtn.click();
         return browser.wait(EC.urlContains('/booking/payment'));
