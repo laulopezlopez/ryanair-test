@@ -9,6 +9,7 @@
         signInBtn: $('#myryanair-auth-login'),
         cartContinueBtn: $('.cart  button'),
         cartPriceValue: $('.cart .price-total .price-number'),
+        popupMsgCloseBtn :$('.popup-msg .popup-msg__close'),
         loginModal: {
             emailInput: $('.signup-modal input[name="emailAddress"]'),
             passInput: $('.signup-modal input[name="password"]'),

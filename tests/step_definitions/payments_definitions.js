@@ -17,7 +17,8 @@ Given(/^I make a booking from "([^"]*)" to "([^"]*)" on (\d+)\/(\d+)\/(\d+) for 
         this.verifyNotText(mainPage.cartPriceValue,"0.00", "Flight was not added to cart");
         this.clickOn(mainPage.cartContinueBtn);
         seatsPage.selectSeats(this,adults + children);
-        this.clickOn(mainPage.cartContinueBtn);
+        this.waitForURLToLoad('/booking/payment');
+        this.clickIfPresent(mainPage.popupMsgCloseBtn);
         return this.waitForURLToLoad('/booking/payment');
     });
 
