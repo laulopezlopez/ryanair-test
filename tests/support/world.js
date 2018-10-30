@@ -7,7 +7,7 @@
 
     setDefaultTimeout(60 * 1000);
 
-    function CustomWorld() {
+    function CustomWorld({attach}) {
 
         var chai = require('chai'),
             expect = chai.expect,
@@ -18,6 +18,7 @@
         const defaultCustomTimeout = 10000;
         const customTimeout = browser.params.customTimeout || defaultCustomTimeout;
 
+        this.attach = attach;
 
         this.goTo = function (url) {
             return browser.get(url);
@@ -28,13 +29,13 @@
         };
 
         this.waitForDisplayed = function (elementSelector) {
-            browser.wait(EC.presenceOf(elementSelector), customTimeout, errors.ELEMENT_PRESENT);
+            return browser.wait(EC.presenceOf(elementSelector), customTimeout, errors.ELEMENT_PRESENT);
         };
         this.waitForNotDisplayed = function (elementSelector) {
-            browser.wait(EC.not(EC.presenceOf(elementSelector), customTimeout, errors.ELEMENT_PRESENT));
+            return browser.wait(EC.not(EC.presenceOf(elementSelector), customTimeout, errors.ELEMENT_PRESENT));
         };
         this.waitForNotVisible= function (elementSelector) {
-            browser.wait(EC.not(EC.visibilityOf(elementSelector), customTimeout, errors.ELEMENT_PRESENT));
+            return browser.wait(EC.not(EC.visibilityOf(elementSelector), customTimeout, errors.ELEMENT_PRESENT));
         };
 
         this.clickOn = function (elmnt) {
