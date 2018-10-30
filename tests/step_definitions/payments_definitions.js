@@ -28,8 +28,7 @@ When(/^I pay for booking with card details "(\+?[\d ]+)", "(\d+)\/(\d+)" and "(\
         paymentPage.fillCardDetails(myCard);
         paymentPage.fillBillingDetails();
         paymentPage.checkAcceptPolicy();
-        this.clickOn(paymentPage.payNowBtn);
-        return this.waitForURLToLoad('/booking/payment');
+        return this.clickOn(paymentPage.payNowBtn);
     });
 
 Then(/^I should get payment declined message$/, function () {
