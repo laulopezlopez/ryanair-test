@@ -5,7 +5,7 @@ exports.config = {
         shardTestFiles: false,
         maxInstances: 1,
         chromeOptions: {
-            args: ['disable-infobars']
+            args: ['disable-infobars','--start-maximized']
         }
     },
     framework: 'custom',
