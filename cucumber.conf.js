@@ -1,13 +1,13 @@
 exports.config = {
     seleniumAddress: 'http://localhost:4444/wd/hub',
-    multiCapabilities: [{
-        browserName: 'firefox',
-        shardTestFiles: true,
-        maxInstances: 2,
+    capabilities: {
+        browserName: 'chrome',
+        shardTestFiles: false,
+        maxInstances: 1,
         chromeOptions: {
             args: ['disable-infobars']
         }
-    }],
+    },
     framework: 'custom',
     frameworkPath: require.resolve('protractor-cucumber-framework'),
     specs: [
@@ -26,10 +26,11 @@ exports.config = {
     },
     plugins: [{
         package: 'protractor-multiple-cucumber-html-reporter-plugin',
-        options:{
+        options: {
             // read the options part for more options
             automaticallyGenerateReport: true,
-            removeExistingJsonReportFile: true
+            removeExistingJsonReportFile: true,
+            removeOriginalJsonReportFile: true
         }
     }],
     onPrepare: function () {
