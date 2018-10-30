@@ -1,6 +1,6 @@
 'use strict';
 const {Given, When, Then} = require('cucumber');
-const {expect} = require('chai');
+
 
 
 var mainPage = require('../pages/mainPage.js');
@@ -35,7 +35,7 @@ When(/^I pay for booking with card details "(\+?[\d ]+)", "(\d+)\/(\d+)" and "(\
     });
 
 Then(/^I should get payment declined message$/, function () {
-    //  expect(paymentPage.paymentDeclinedMessage.isDisplayed()).to.eventually.equals(false,"Error in card message is shown");
+    this.moveTo(paymentPage.cardNumberInput);
     return this.verifyDisplayed(paymentPage.paymentDeclinedMessage, "Payment Declined Message not shown");
 
 });

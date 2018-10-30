@@ -1,13 +1,13 @@
 (function () {
     'use strict';
     var {setWorldConstructor} = require('cucumber');
-    const protractor = require('protractor');
+    const {browser,protractor} = require('protractor');
     const errors = require('./errors.js');
     var {setDefaultTimeout} = require('cucumber');
 
     setDefaultTimeout(60 * 1000);
 
-    function CustomWorld() {
+    function CustomWorld({attach}) {
 
         var chai = require('chai'),
             expect = chai.expect,
@@ -18,6 +18,7 @@
         const defaultCustomTimeout = 10000;
         const customTimeout = browser.params.customTimeout || defaultCustomTimeout;
 
+        this.attach = attach;
 
         this.goTo = function (url) {
             return browser.get(url);
@@ -28,13 +29,13 @@
         };
 
         this.waitForDisplayed = function (elementSelector) {
-            browser.wait(EC.presenceOf(elementSelector), customTimeout, errors.ELEMENT_PRESENT);
+            return browser.wait(EC.presenceOf(elementSelector), customTimeout, errors.ELEMENT_PRESENT);
         };
         this.waitForNotDisplayed = function (elementSelector) {
-            browser.wait(EC.not(EC.presenceOf(elementSelector), customTimeout, errors.ELEMENT_PRESENT));
+            return browser.wait(EC.not(EC.presenceOf(elementSelector), customTimeout, errors.ELEMENT_PRESENT));
         };
-        this.waitForNotVisible= function (elementSelector) {
-            browser.wait(EC.not(EC.visibilityOf(elementSelector), customTimeout, errors.ELEMENT_PRESENT));
+        this.waitForNotVisible = function (elementSelector) {
+            return browser.wait(EC.not(EC.visibilityOf(elementSelector), customTimeout, errors.ELEMENT_PRESENT));
         };
 
         this.clickOn = function (elmnt) {
@@ -44,7 +45,7 @@
         };
 
         this.clickIfPresent = function (elmnt) {
-            var page=this;
+            var page = this;
             return elmnt.isPresent().then(function (isPresent) {
                 if (isPresent) {
                     return page.clickOn(elmnt);
@@ -76,6 +77,10 @@
             return expect(elmnt.getText()).not.to.eventually.equal(text, errorMsg);
         };
 
+        this.moveTo = function (page, elmnt) {
+            this.waitForDisplayed(elmnt);
+            return browser.actions().mouseMove(elmnt).perform();
+        };
     }
 
     setWorldConstructor(CustomWorld);
