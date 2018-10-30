@@ -1,7 +1,7 @@
 exports.config = {
     seleniumAddress: 'http://localhost:4444/wd/hub',
     multiCapabilities: [{
-        browserName: 'chrome',
+        browserName: 'firefox',
         shardTestFiles: true,
         maxInstances: 2,
         chromeOptions: {
@@ -13,6 +13,7 @@ exports.config = {
     specs: [
         'tests/features/*.feature'
     ],
+    ignoreUncaughtExceptions: true,
     cucumberOpts: {
         require: ['tests/step_definitions/*.js',
             'tests/support/*.js',],
