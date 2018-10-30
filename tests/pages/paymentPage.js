@@ -3,9 +3,9 @@
     var testdata = require('../test_data/data.json');
     module.exports = {
 
-        page: this,
         signInBtn: $('#myryanair-auth-login'),
         paymentDeclinedMessage: $('prompt.error'),
+        passengerElements: $$('.pax-form-element'),
         passengerDetails: {
             getPassengerTitleSelectorOpt: function (num, title) {
                 return $('[name="passengerForm' + num + '"] .payment-passenger-title select option[label="' + title + '"]');

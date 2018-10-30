@@ -23,7 +23,7 @@ Given(/^I make a booking from "([^"]*)" to "([^"]*)" on (\d+)\/(\d+)\/(\d+) for 
 
 When(/^I pay for booking with card details "(\+?[\d ]+)", "(\d+)\/(\d+)" and "(\d+)"$/,
     function (cardNumber, expiryMonth, expiryYear, cvv) {
-        paymentPage.fillTwoAdultsAndOneChildData();
+        paymentPage.fillPassengersDetails(this);
         var myCard = paymentPage.createCard(cardNumber, expiryMonth, expiryYear, cvv);
         paymentPage.fillContactDetails();
         paymentPage.fillCardDetails(myCard);
