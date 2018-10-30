@@ -11,7 +11,7 @@ The main object of this project is to create a testing environment for the Ryana
 * BDD implementation using Cucumber
 * Page Object design pattern implementation.
 * HTML Reports
-* Screenshots on failure feature scenarios.
+* Screenshots on failed scenarios.
 
 #### Pre-requisites
 1.NodeJS installed globally in the system.
@@ -19,6 +19,10 @@ https://nodejs.org/en/download/
 
 2.Chrome or Firefox browsers installed.
 
+2.WebDriver-Manager installed globally in the system (since directConnect still presents some issues)
+```
+npm install -g webdriver-manager
+```
 
 #### Setup Scripts
 * Clone the repository into a folder
@@ -32,7 +36,7 @@ npm install
 
 * Now just run the test command which launches the Chrome Browser and runs the scripts.
 ```
-npm test
+npm run e2e
 ```
 
 #### HTML Reports
