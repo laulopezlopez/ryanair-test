@@ -11,10 +11,10 @@
                 return $('[name="passengerForm' + num + '"] .payment-passenger-title select option[label="' + title + '"]');
             },
             getPassengerNameInput: function (num) {
-                return $('[name="passengerForm' + num + '"] .payment-passenger-first-name input')
+                return $('[name="passengerForm' + num + '"] .payment-passenger-first-name input');
             },
             getPassengerLastNameInput: function (num) {
-                return $('[name="passengerForm' + num + '"] .payment-passenger-last-name input')
+                return $('[name="passengerForm' + num + '"] .payment-passenger-last-name input');
             },
 
         },
@@ -37,23 +37,21 @@
         },
         payNowBtn: $('button[ng-click="$ctrl.processPayment()"]'),
 
-        fillAdult: function (num, adult = testdata.passengers.adult1) {
-            this.passengerDetails.getPassengerTitleSelectorOpt(num, adult.title).click();
+        fillPassengersDetails: function (context, passengers = testdata.passengers) {
+            var page = this;
+            return this.passengerElements.count().then(function (nPassengers) {
+                for (var i = 0; i < nPassengers; i++) {
+                    page.fillPassengerInfo(context, i, passengers[i]);
+                }
+            });
+        },
+        fillPassengerInfo: function (context, num, adult = testdata.passengers[0]) {
+            context.clickIfPresent(this.passengerDetails.getPassengerTitleSelectorOpt(num, adult.title));
             this.passengerDetails.getPassengerNameInput(num).sendKeys(adult.name);
             this.passengerDetails.getPassengerLastNameInput(num).sendKeys(adult.lastName);
         },
-        fillChild: function (num, child = testdata.passengers.child) {
-            this.passengerDetails.getPassengerNameInput(num).sendKeys(child.name);
-            this.passengerDetails.getPassengerLastNameInput(num).sendKeys(child.lastName);
-        },
-        fillTwoAdultsAndOneChildData: function () {
-            var adult1 = testdata.passengers.adult1;
-            this.fillAdult(0);
-            this.fillAdult(1, testdata.passengers.adult2);
-            this.fillChild(2, testdata.passengers.child);
-        },
-        fillCardDetails: function (card = testdata.cards.card1) {
 
+        fillCardDetails: function (card = testdata.cards.card1) {
             var payment = this.paymentDetails;
             payment.cardNumberInput.sendKeys(card.cardNumber.replace(/\s/g, ""));
             this.selectOpt('expiryMonth', card.expiryMonth).click();
@@ -62,11 +60,11 @@
             payment.securityCodeInput.sendKeys(card.cvv);
             payment.cardHolderNameInput.sendKeys(card.holdersName);
         },
-        fillBillingDetails: function (billingData = testdata.passengers.adult1.billingData) {
+        fillBillingDetails: function (billingData = testdata.passengers[0].billingData) {
             this.paymentDetails.billingAddressAddressInput.sendKeys(billingData.address);
             this.paymentDetails.billingAddressCityInput.sendKeys(billingData.city);
         },
-        fillContactDetails: function (phone = testdata.passengers.adult1.phone) {
+        fillContactDetails: function (phone = testdata.passengers[0].phone) {
             this.selectOpt('phoneNumberCountry', phone.country).click();
             this.contactDetails.phoneNumber.sendKeys(phone.number);
 
