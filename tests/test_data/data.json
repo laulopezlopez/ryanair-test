@@ -1,8 +1,8 @@
 {
   "login_email": "testryanair@mail.com",
   "login_pass": "T3st.ryanair",
-  "passengers": {
-    "adult1": {
+  "passengers": [
+    {
       "title": "Mr",
       "name": "Roberto",
       "lastName": "Veiga",
@@ -17,7 +17,7 @@
         "country": "Spain"
       }
     },
-    "adult2": {
+    {
       "title": "Ms",
       "name": "Conchi",
       "lastName": "Lopez",
@@ -32,11 +32,52 @@
         "country": "Spain"
       }
     },
-    "child": {
+    {
+      "title": "Mr",
       "name": "Miguel",
-      "lastName": "Lopez"
+      "lastName": "Lopez",
+      "phone": {
+        "country": "Spain",
+        "number": "677845767"
+      },
+      "billingData": {
+        "address": "Road 3",
+        "city": "Madrid",
+        "postCode": "26028",
+        "country": "Spain"
+      }
+    },
+    {
+      "title": "Ms",
+      "name": "Laura",
+      "lastName": "Lopez",
+      "phone": {
+        "country": "Spain",
+        "number": "677822767"
+      },
+      "billingData": {
+        "address": "Road 4",
+        "city": "Lugo",
+        "postCode": "28022",
+        "country": "Spain"
+      }
+    },
+    {
+      "title": "Ms",
+      "name": "Elena",
+      "lastName": "Sagunto",
+      "phone": {
+        "country": "Spain",
+        "number": "677890067"
+      },
+      "billingData": {
+        "address": "Road 19",
+        "city": "Barcelona",
+        "postCode": "18028",
+        "country": "Spain"
+      }
     }
-  },
+  ],
   "cards": {
     "card1": {
       "number": "2345 3456 1234 1234",

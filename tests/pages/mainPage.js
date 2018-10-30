@@ -1,36 +1,27 @@
-'use strict';
-// The require statement will import your JSON file into the json variable
-var testdata = require('../test_data/data.json');
+(function () {
+    'use strict';
+
+    var testdata = require('../test_data/data.json');
 
 
-module.exports = {
+    module.exports = {
 
-    page: this,
-    signInBtn: $('#myryanair-auth-login'),
-    loginModal: {
-        emailInput: $('.signup-modal input[name="emailAddress"]'),
-        passInput: $('.signup-modal input[name="password"]'),
-        logInBtn: $('.signup-modal button[class="core-btn-primary"]')
-    },
-
-    doLogin: function (email = testdata.login_email, pass = testdata.login_pass) {
-        this.signInBtn.click();
-        this.loginModal.emailInput.sendKeys(email);
-        this.loginModal.passInput.sendKeys(pass);
-        return this.loginModal.logInBtn.click();
-    },
-    cartContinueBtn: $('.cart  button'),
-    cartPriceValue: $('.cart .price-total .price-number'),
-
-
-    go:
-        function (site) {
-            browser.get(site);
+        signInBtn: $('#myryanair-auth-login'),
+        cartContinueBtn: $('.cart  button'),
+        cartPriceValue: $('.cart .price-total .price-number'),
+        loginModal: {
+            emailInput: $('.signup-modal input[name="emailAddress"]'),
+            passInput: $('.signup-modal input[name="password"]'),
+            logInBtn: $('.signup-modal button[class="core-btn-primary"]')
         },
-
-
-};
-
+        doLogin: function (email = testdata.login_email, pass = testdata.login_pass) {
+            this.signInBtn.click();
+            this.loginModal.emailInput.sendKeys(email);
+            this.loginModal.passInput.sendKeys(pass);
+            return this.loginModal.logInBtn.click();
+        },
+    };
+}());
 
 
 
