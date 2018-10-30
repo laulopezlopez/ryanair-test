@@ -10,13 +10,16 @@
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "cucumber": "^5.0.2",
-    "protractor-cucumber-framework": "^6.1.1"
+    "protractor-cucumber-framework": "^6.1.1",
+    "protractor-multiple-cucumber-html-reporter-plugin": "^1.8.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "npm run webdriver:update",
+    "webdriver:start": "webdriver-manager start",
+    "webdriver:update": "webdriver-manager update",
+    "test": "protractor ./cucumber.conf.js",
+    "e2e": "npm run webdriver:start && sleep 2 && npm test"
   },
-  "pretest": "webdriver-manager update",
-  "test": "protractor ./cucumber.conf.js",
-  "author": "",
+  "author": "Laura López",
   "license": "ISC"
 }

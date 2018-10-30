@@ -1,7 +1,5 @@
 'use strict';
 const {Given, When, Then} = require('cucumber');
-const {expect} = require('chai');
-
 
 var mainPage = require('../pages/mainPage.js');
 var flightPage = require('../pages/flightPage.js');
@@ -17,6 +15,7 @@ Given(/^I make a booking from "([^"]*)" to "([^"]*)" on (\d+)\/(\d+)\/(\d+) for 
         this.verifyNotText(mainPage.cartPriceValue,"0.00", "Flight was not added to cart");
         this.clickOn(mainPage.cartContinueBtn);
         seatsPage.selectSeats(this,adults + children);
+        this.clickIfPresent(mainPage.popupMsgCloseBtn);
         this.clickOn(mainPage.cartContinueBtn);
         return this.waitForURLToLoad('/booking/payment');
     });
@@ -29,12 +28,11 @@ When(/^I pay for booking with card details "(\+?[\d ]+)", "(\d+)\/(\d+)" and "(\
         paymentPage.fillCardDetails(myCard);
         paymentPage.fillBillingDetails();
         paymentPage.checkAcceptPolicy();
-        this.clickOn(paymentPage.payNowBtn);
-        return this.waitForURLToLoad('/booking/payment');
+        return this.clickOn(paymentPage.payNowBtn);
     });
 
 Then(/^I should get payment declined message$/, function () {
-    //  expect(paymentPage.paymentDeclinedMessage.isDisplayed()).to.eventually.equals(false,"Error in card message is shown");
+    this.moveTo(paymentPage.paymentDetails.cardNumberInput);
     return this.verifyDisplayed(paymentPage.paymentDeclinedMessage, "Payment Declined Message not shown");
 
 });
