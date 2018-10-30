@@ -16,7 +16,7 @@
   "scripts": {
     "test": "protractor cucumber.conf.js",
     "pretest": "webdriver-manager update",
-    "e2e-test": "(webdriver-manager start &) && sleep 2 && (node_modules/http-server/bin/http-server . &) && test"
+    "e2e-test": "(webdriver-manager start &) && sleep 2 && test"
   },
   "author": "Laura López",
   "license": "ISC"
