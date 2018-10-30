@@ -17,7 +17,7 @@ The main object of this project is to create a testing environment for the Ryana
 1.NodeJS installed globally in the system.
 https://nodejs.org/en/download/
 
-2.Chrome or Firefox browsers installed.
+2.Chrome browser installed.
 
 2.WebDriver-Manager installed globally in the system (since directConnect still presents some issues)
 ```
@@ -26,7 +26,7 @@ npm install -g webdriver-manager
 
 #### Setup Scripts
 * Clone the repository into a folder
-* Go inside the folder and run on a terminal/command prompt the following command, that will install all the dependencies
+* Go inside the folder and run on a terminal/command prompt the following command to install all the dependencies
 ```
 npm install
 ```
