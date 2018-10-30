@@ -30,6 +30,9 @@
         this.waitForDisplayed = function (elementSelector) {
             browser.wait(EC.presenceOf(elementSelector), customTimeout, errors.ELEMENT_PRESENT);
         };
+        this.waitForNotDisplayed = function (elementSelector) {
+            browser.wait(EC.not(EC.presenceOf(elementSelector), customTimeout, errors.ELEMENT_PRESENT));
+        };
         this.waitForNotVisible= function (elementSelector) {
             browser.wait(EC.not(EC.visibilityOf(elementSelector), customTimeout, errors.ELEMENT_PRESENT));
         };
