@@ -5,7 +5,7 @@
         popupBtn: $('.seat-map-prompt-content .core-btn-primary'),
         firstAvailableSeat: $$('.seat-row-seat:not(.reserved):not(.selected):not(.extra-leg) .seat-click').get(0),
         availableSeats: $$('.seat-row-seat:not(.reserved):not(.selected):not(.extra-leg) .seat-click'),
-        insuranceAcceptBtn: $('#ngdialog3 button'),
+        addFastTrackBtn: $('.fasttrack-popup__right button'),
         seatMapHeader: $('.seat-map-header'),
         footerBtn: $('[data-ref="dialog-overlay-footer-ok-btn"]'),
 
@@ -18,7 +18,7 @@
             context.clickOn(this.footerBtn);
             context.waitForNotDisplayed(this.availableSeats);
             context.clickOn(this.footerBtn);
-            return context.clickOn(this.insuranceAcceptBtn);
+            return context.clickOn(this.addFastTrackBtn);
         },
 
         scrollAndClickSeat: function (element) {

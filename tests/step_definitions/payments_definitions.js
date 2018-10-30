@@ -13,10 +13,10 @@ Given(/^I make a booking from "([^"]*)" to "([^"]*)" on (\d+)\/(\d+)\/(\d+) for 
     function (departure, destination, day, month, year, adults, children) {
         flightPage.searchFlights(this, departure, destination, day, month, year, adults, children);
         flightPage.chooseAnyFlight(this);
+        mainPage.doLogin();
         this.verifyNotText(mainPage.cartPriceValue,"0.00", "Flight was not added to cart");
         this.clickOn(mainPage.cartContinueBtn);
         seatsPage.selectSeats(this,adults + children);
-        mainPage.doLogin();
         this.clickOn(mainPage.cartContinueBtn);
         return this.waitForURLToLoad('/booking/payment');
     });
@@ -24,8 +24,8 @@ Given(/^I make a booking from "([^"]*)" to "([^"]*)" on (\d+)\/(\d+)\/(\d+) for 
 When(/^I pay for booking with card details "(\+?[\d ]+)", "(\d+)\/(\d+)" and "(\d+)"$/,
     function (cardNumber, expiryMonth, expiryYear, cvv) {
         paymentPage.fillPassengersDetails(this);
-        var myCard = paymentPage.createCard(cardNumber, expiryMonth, expiryYear, cvv);
         paymentPage.fillContactDetails();
+        var myCard = paymentPage.createCard(cardNumber, expiryMonth, expiryYear, cvv);
         paymentPage.fillCardDetails(myCard);
         paymentPage.fillBillingDetails();
         paymentPage.checkAcceptPolicy();
