@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     var {setWorldConstructor} = require('cucumber');
-    const {browser,protractor} = require('protractor');
+    const {browser, protractor} = require('protractor');
     const errors = require('./errors.js');
     var {setDefaultTimeout} = require('cucumber');
 
@@ -77,7 +77,7 @@
             return expect(elmnt.getText()).not.to.eventually.equal(text, errorMsg);
         };
 
-        this.moveTo = function (page, elmnt) {
+        this.moveTo = function (elmnt) {
             this.waitForDisplayed(elmnt);
             return browser.actions().mouseMove(elmnt).perform();
         };

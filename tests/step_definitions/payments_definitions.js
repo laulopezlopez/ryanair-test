@@ -1,8 +1,6 @@
 'use strict';
 const {Given, When, Then} = require('cucumber');
 
-
-
 var mainPage = require('../pages/mainPage.js');
 var flightPage = require('../pages/flightPage.js');
 var seatsPage = require('../pages/seatsPage.js');
@@ -17,8 +15,8 @@ Given(/^I make a booking from "([^"]*)" to "([^"]*)" on (\d+)\/(\d+)\/(\d+) for 
         this.verifyNotText(mainPage.cartPriceValue,"0.00", "Flight was not added to cart");
         this.clickOn(mainPage.cartContinueBtn);
         seatsPage.selectSeats(this,adults + children);
-        this.waitForURLToLoad('/booking/payment');
         this.clickIfPresent(mainPage.popupMsgCloseBtn);
+        this.clickOn(mainPage.cartContinueBtn);
         return this.waitForURLToLoad('/booking/payment');
     });
 
@@ -35,7 +33,7 @@ When(/^I pay for booking with card details "(\+?[\d ]+)", "(\d+)\/(\d+)" and "(\
     });
 
 Then(/^I should get payment declined message$/, function () {
-    this.moveTo(paymentPage.cardNumberInput);
+    this.moveTo(paymentPage.paymentDetails.cardNumberInput);
     return this.verifyDisplayed(paymentPage.paymentDeclinedMessage, "Payment Declined Message not shown");
 
 });
