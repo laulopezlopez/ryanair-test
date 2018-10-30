@@ -44,9 +44,10 @@
         };
 
         this.clickIfPresent = function (elmnt) {
+            var page=this;
             return elmnt.isPresent().then(function (isPresent) {
                 if (isPresent) {
-                    return elmnt.click();
+                    return page.clickOn(elmnt);
                 }
             });
         };
