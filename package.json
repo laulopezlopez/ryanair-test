@@ -18,7 +18,7 @@
     "webdriver:start": "webdriver-manager start",
     "webdriver:update": "webdriver-manager update",
     "test": "protractor ./cucumber.conf.js",
-    "e2e": "npm run webdriver:start && sleep 2 && npm test"
+    "test-windows":"protractor ./cucumber.conf.js --capabilities.chromeOptions.args=disable-infobars --capabilities.chromeOptions.args=--start-maximized"
   },
   "author": "Laura López",
   "license": "ISC"

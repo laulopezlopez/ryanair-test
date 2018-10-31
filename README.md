@@ -19,24 +19,25 @@ https://nodejs.org/en/download/
 
 2.Chrome browser installed.
 
-2.WebDriver-Manager installed globally in the system (since directConnect still presents some issues)
-```
-npm install -g webdriver-manager
-```
 
 #### Setup Scripts
 * Clone the repository into a folder
-* Go inside the folder and run on a terminal/command prompt the following command to install all the dependencies
+* Go inside the folder and run on a terminal/command prompt the following command
+
 ```
 npm install
 ```
+This will install all the dependencies.
 
 
 #### Run Scripts
-
-* Now just run the test command which launches the Chrome Browser and runs the scripts.
+* Run a Selenium Server (this command might need sudo permissions)
 ```
-npm run e2e
+webdriver-manager start
+```
+* On another terminal run the test command that launches the Chrome Browser and runs the scripts:
+```
+npm run test
 ```
 
 #### HTML Reports

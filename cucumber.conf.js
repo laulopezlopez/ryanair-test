@@ -5,7 +5,7 @@ exports.config = {
         shardTestFiles: false,
         maxInstances: 1,
         chromeOptions: {
-            args: ['disable-infobars','--start-maximized']
+            args: ['disable-infobars','start-fullscreen']
         }
     },
     framework: 'custom',
@@ -34,6 +34,6 @@ exports.config = {
         }
     }],
     onPrepare: function () {
-        browser.manage().window().maximize();
+
     }
 };
