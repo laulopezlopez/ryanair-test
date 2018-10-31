@@ -32,10 +32,10 @@
             return browser.wait(EC.presenceOf(elementSelector), customTimeout, errors.ELEMENT_PRESENT);
         };
         this.waitForNotDisplayed = function (elementSelector) {
-            return browser.wait(EC.not(EC.presenceOf(elementSelector), customTimeout, errors.ELEMENT_PRESENT));
+            return browser.wait(EC.not(EC.presenceOf(elementSelector), customTimeout, errors.ELEMENT_VISIBLE));
         };
         this.waitForNotVisible = function (elementSelector) {
-            return browser.wait(EC.not(EC.visibilityOf(elementSelector), customTimeout, errors.ELEMENT_PRESENT));
+            return browser.wait(EC.not(EC.visibilityOf(elementSelector), customTimeout, errors.ELEMENT_NOT_VISIBLE));
         };
 
         this.clickOn = function (elmnt) {
