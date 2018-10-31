@@ -35,7 +35,7 @@ This will install all the dependencies.
 ```
 webdriver-manager start
 ```
-* Now just run the test command which launches the Chrome Browser and runs the scripts.
+* On another terminal run the test command that launches the Chrome Browser and runs the scripts:
 ```
 npm run test
 ```
